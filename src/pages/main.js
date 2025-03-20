@@ -6,6 +6,7 @@ import menuConfig from "../config/index";
 
 import { useSelector, useDispatch } from "react-redux";
 import { collapseMenu } from "../store/reducers/menuItems";
+import { Outlet } from "react-router-dom";
 
 const { Header, Sider, Content } = Layout;
 
@@ -114,7 +115,7 @@ const Main = () => {
             borderRadius: borderRadiusLG,
           }}
         >
-          Content
+          <Outlet />
         </Content>
       </Layout>
     </Layout>

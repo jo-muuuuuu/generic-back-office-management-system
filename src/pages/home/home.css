@@ -1,0 +1,83 @@
+.home img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-right: 40px;
+}
+
+.home .user-info .user-name {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.home .user {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #cccccc;
+}
+
+.home .log-info p .log-info-title {
+  width: 150px;
+  display: inline-block;
+
+  font-size: 14px;
+  line-height: 28px;
+  color: #999999;
+}
+
+.home .log-info p .log-info-detail {
+  margin-left: 30px;
+  color: #666666;
+}
+
+.home .order {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.home .order .ant-card {
+  width: 32%;
+
+  margin: 5px 10px;
+}
+
+.home .order .ant-card-body {
+  display: flex;
+  padding: 10px 25px;
+}
+
+.home .order .icon-box {
+  width: 80px;
+  height: 80px;
+  text-align: center;
+  line-height: 85px;
+  color: #ffffff;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.home .anticon {
+  font-size: 30px;
+}
+
+.home .order .detail {
+  margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.home .order .detail .value {
+  font-size: 28px;
+  margin: 0;
+}
+.home .order .detail .title {
+  font-size: 16px;
+  text-align: center;
+  color: #999999;
+}

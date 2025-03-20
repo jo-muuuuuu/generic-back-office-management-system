@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import * as Icon from "@ant-design/icons";
 import { Button, Layout, Menu, Avatar, Dropdown, theme } from "antd";
 
 import menuConfig from "../config/index";
+
+import { useSelector, useDispatch } from "react-redux";
+import { collapseMenu } from "../store/reducers/menuItems";
 
 const { Header, Sider, Content } = Layout;
 
@@ -33,7 +36,13 @@ const items = menuConfig.map((menuItem) => {
 });
 
 const Main = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  // const [collapsed, setCollapsed] = useState(false);
+  const collapsed = useSelector((state) => state.menuItems.isCollapse);
+  const dispatch = useDispatch();
+
+  const setCollapsed = () => {
+    dispatch(collapseMenu());
+  };
 
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -65,7 +74,7 @@ const Main = () => {
   return (
     <Layout className="main-container">
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <h3 className="app-name">Generic Back Office Management System</h3>
+        <h3 className="app-name">{collapsed ? "Back Office" : "Generic Back Office Management System"}</h3>
         {/* <div className="demo-logo-vertical" /> */}
         <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]} items={items} style={{ height: "100%" }} />
       </Sider>
@@ -80,8 +89,11 @@ const Main = () => {
         >
           <Button
             type="text"
+            onClick={() => {
+              setCollapsed();
+            }}
             icon={collapsed ? <Icon.MenuUnfoldOutlined /> : <Icon.MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
+            // onClick={() => setCollapsed(!collapsed)}
             style={{
               fontSize: "16px",
               width: 64,

@@ -1,0 +1,10 @@
+.user-container .button-container {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+}
+
+.user-container .operation-buttons {
+  display: flex;
+}

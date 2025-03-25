@@ -6,7 +6,7 @@ import menuConfig from "../config/index";
 
 import { useSelector, useDispatch } from "react-redux";
 import { collapseMenu } from "../store/reducers/menuItems";
-import { Outlet } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 
 const { Header, Sider, Content } = Layout;
 
@@ -40,6 +40,7 @@ const Main = () => {
   // const [collapsed, setCollapsed] = useState(false);
   const collapsed = useSelector((state) => state.menuItems.isCollapse);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const setCollapsed = () => {
     dispatch(collapseMenu());
@@ -72,12 +73,16 @@ const Main = () => {
     },
   ];
 
+  const selectMenu = (event) => {
+    navigate(event.key);
+  };
+
   return (
     <Layout className="main-container">
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <h3 className="app-name">{collapsed ? "Back Office" : "Generic Back Office Management System"}</h3>
         {/* <div className="demo-logo-vertical" /> */}
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]} items={items} style={{ height: "100%" }} />
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]} items={items} style={{ height: "100%" }} onClick={selectMenu} />
       </Sider>
 
       <Layout>

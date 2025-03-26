@@ -3,9 +3,10 @@ import * as Icon from "@ant-design/icons";
 import { Button, Layout, Menu, Avatar, Dropdown, theme } from "antd";
 
 import menuConfig from "../config/index";
+import NavigationTag from "../components/Tag";
 
 import { useSelector, useDispatch } from "react-redux";
-import { collapseMenu } from "../store/reducers/menuItems";
+import { collapseMenu, setTabsList } from "../store/reducers/menuItems";
 import { useNavigate, Outlet } from "react-router-dom";
 
 const { Header, Sider, Content } = Layout;
@@ -46,6 +47,10 @@ const Main = () => {
     dispatch(collapseMenu());
   };
 
+  const setTabs = (value) => {
+    dispatch(setTabsList(value));
+  };
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -74,15 +79,43 @@ const Main = () => {
   ];
 
   const selectMenu = (event) => {
+    let data;
+    menuConfig.forEach((item) => {
+      if (item.path === event.keyPath[event.keyPath.length - 1]) {
+        data = item;
+        if (event.keyPath.length > 1) {
+          data = item.children.find((child) => {
+            return child.path === event.key;
+          });
+        }
+      }
+    });
+
+    // console.log("tag data", data);
+    setTabs({
+      path: data.path,
+      name: data.name,
+      label: data.label,
+    });
+
     navigate(event.key);
   };
 
   return (
     <Layout className="main-container">
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <h3 className="app-name">{collapsed ? "Back Office" : "Generic Back Office Management System"}</h3>
+        <h3 className="app-name">
+          {collapsed ? "Back Office" : "Generic Back Office Management System"}
+        </h3>
         {/* <div className="demo-logo-vertical" /> */}
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]} items={items} style={{ height: "100%" }} onClick={selectMenu} />
+        <Menu
+          theme="dark"
+          mode="inline"
+          defaultSelectedKeys={["1"]}
+          items={items}
+          style={{ height: "100%" }}
+          onClick={selectMenu}
+        />
       </Sider>
 
       <Layout>
@@ -108,9 +141,15 @@ const Main = () => {
           />
 
           <Dropdown menu={{ items: dropdownItems }}>
-            <Avatar src={<img src={require("../assets/kira.jpeg")} />} style={{ marginRight: "32px" }} />
+            <Avatar
+              src={<img src={require("../assets/kira.jpeg")} />}
+              style={{ marginRight: "32px" }}
+            />
           </Dropdown>
         </Header>
+
+        <NavigationTag />
+
         <Content
           style={{
             margin: "24px 16px",

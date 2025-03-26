@@ -4,7 +4,7 @@ import * as Icon from "@ant-design/icons";
 
 import "./home.css";
 import { getData } from "../../api";
-import MyEcharts from "../../Echarts";
+import MyEcharts from "../../components/Echarts/index";
 
 const columns = [
   { title: "City", dataIndex: "name" },
@@ -143,7 +143,12 @@ const Home = () => {
         </Card>
 
         <Card>
-          <Table dataSource={tableData} rowKey={"name"} columns={columns} pagination={false} />
+          <Table
+            dataSource={tableData}
+            rowKey={"name"}
+            columns={columns}
+            pagination={false}
+          />
         </Card>
       </Col>
 
@@ -165,11 +170,24 @@ const Home = () => {
           })}
         </div>
 
-        {echartsData.orderData && <MyEcharts chartData={echartsData.orderData} style={{ height: "280px" }} />}
+        {echartsData.orderData && (
+          <MyEcharts chartData={echartsData.orderData} style={{ height: "280px" }} />
+        )}
 
         <div style={{ display: "flex" }}>
-          {echartsData.userData && <MyEcharts chartData={echartsData.userData} style={{ height: "240px", width: "50%" }} />}
-          {echartsData.videoData && <MyEcharts chartData={echartsData.videoData} style={{ height: "260px", width: "50%" }} option={"normalOptions"} />}
+          {echartsData.userData && (
+            <MyEcharts
+              chartData={echartsData.userData}
+              style={{ height: "240px", width: "50%" }}
+            />
+          )}
+          {echartsData.videoData && (
+            <MyEcharts
+              chartData={echartsData.videoData}
+              style={{ height: "260px", width: "50%" }}
+              option={"normalOptions"}
+            />
+          )}
         </div>
       </Col>
     </Row>

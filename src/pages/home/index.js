@@ -64,7 +64,7 @@ const Home = () => {
 
   useEffect(() => {
     getData().then((res) => {
-      console.log(res.data.data);
+      // console.log(res.data.data);
       const { tableData, orderData, userData, videoData } = res.data.data;
 
       setTableData(tableData);
@@ -73,7 +73,7 @@ const Home = () => {
       const xData = orderData.location;
 
       const keyArray = Object.keys(orderData.data[0]);
-      console.log(keyArray);
+      // console.log(keyArray);
       const seriesData = [];
       keyArray.forEach((key) => {
         seriesData.push({
@@ -82,7 +82,7 @@ const Home = () => {
           type: "line",
         });
       });
-      console.log(seriesData);
+      // console.log(seriesData);
 
       setEchartsData({
         orderData: {

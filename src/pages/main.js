@@ -1,54 +1,25 @@
 import React from "react";
 import * as Icon from "@ant-design/icons";
-import { Button, Layout, Menu, Avatar, Dropdown, theme } from "antd";
-
-import menuConfig from "../config/index";
-import NavigationTag from "../components/Tag";
-
+import { Button, Layout, Avatar, Dropdown, theme } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { collapseMenu, setTabsList } from "../store/reducers/menuItems";
+import { collapseMenu } from "../store/reducers/menuItems";
 import { useNavigate, Outlet } from "react-router-dom";
 
-const { Header, Sider, Content } = Layout;
+import NavigationTag from "../components/Tag";
 
-// Create Icon Elements
-const createIconElement = (name) => {
-  return React.createElement(Icon[name]);
-};
+import CustomSider from "./customSider";
+import RouterAuth from "../router/routerAuth";
 
-// Menu Items pre-processing
-const items = menuConfig.map((menuItem) => {
-  // No sub-menu
-  const child = {
-    key: menuItem.path,
-    label: menuItem.label,
-    icon: createIconElement(menuItem.icon),
-  };
-
-  if (menuItem.children) {
-    child.children = menuItem.children.map((childrenItem) => {
-      return {
-        key: childrenItem.path,
-        label: childrenItem.label,
-      };
-    });
-  }
-
-  return child;
-});
+const { Header, Content } = Layout;
 
 const Main = () => {
-  // const [collapsed, setCollapsed] = useState(false);
-  const collapsed = useSelector((state) => state.menuItems.isCollapse);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const collapsed = useSelector((state) => state.menuItems.isCollapse);
+
   const setCollapsed = () => {
     dispatch(collapseMenu());
-  };
-
-  const setTabs = (value) => {
-    dispatch(setTabsList(value));
   };
 
   const {
@@ -56,7 +27,9 @@ const Main = () => {
   } = theme.useToken();
 
   const logOut = () => {
-    console.log("log out");
+    localStorage.removeItem("token");
+
+    navigate("/login");
   };
 
   const dropdownItems = [
@@ -78,91 +51,56 @@ const Main = () => {
     },
   ];
 
-  const selectMenu = (event) => {
-    let data;
-    menuConfig.forEach((item) => {
-      if (item.path === event.keyPath[event.keyPath.length - 1]) {
-        data = item;
-        if (event.keyPath.length > 1) {
-          data = item.children.find((child) => {
-            return child.path === event.key;
-          });
-        }
-      }
-    });
-
-    // console.log("tag data", data);
-    setTabs({
-      path: data.path,
-      name: data.name,
-      label: data.label,
-    });
-
-    navigate(event.key);
-  };
-
   return (
-    <Layout className="main-container">
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <h3 className="app-name">
-          {collapsed ? "Back Office" : "Generic Back Office Management System"}
-        </h3>
-        {/* <div className="demo-logo-vertical" /> */}
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          items={items}
-          style={{ height: "100%" }}
-          onClick={selectMenu}
-        />
-      </Sider>
+    <RouterAuth>
+      <Layout className="main-container">
+        <CustomSider />
 
-      <Layout>
-        <Header
-          className="header-container"
-          style={{
-            padding: 0,
-            background: colorBgContainer,
-          }}
-        >
-          <Button
-            type="text"
-            onClick={() => {
-              setCollapsed();
-            }}
-            icon={collapsed ? <Icon.MenuUnfoldOutlined /> : <Icon.MenuFoldOutlined />}
-            // onClick={() => setCollapsed(!collapsed)}
+        <Layout>
+          <Header
+            className="header-container"
             style={{
-              fontSize: "16px",
-              width: 64,
-              height: 64,
+              padding: 0,
+              background: colorBgContainer,
             }}
-          />
-
-          <Dropdown menu={{ items: dropdownItems }}>
-            <Avatar
-              src={<img src={require("../assets/kira.jpeg")} />}
-              style={{ marginRight: "32px" }}
+          >
+            <Button
+              type="text"
+              onClick={() => {
+                setCollapsed();
+              }}
+              icon={collapsed ? <Icon.MenuUnfoldOutlined /> : <Icon.MenuFoldOutlined />}
+              style={{
+                fontSize: "16px",
+                width: 64,
+                height: 64,
+              }}
             />
-          </Dropdown>
-        </Header>
 
-        <NavigationTag />
+            <Dropdown menu={{ items: dropdownItems }}>
+              <Avatar
+                src={<img src={require("../assets/kira.jpeg")} />}
+                style={{ marginRight: "32px" }}
+              />
+            </Dropdown>
+          </Header>
 
-        <Content
-          style={{
-            margin: "24px 16px",
-            padding: 24,
-            minHeight: 280,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
-          }}
-        >
-          <Outlet />
-        </Content>
+          <NavigationTag />
+
+          <Content
+            style={{
+              margin: "24px 16px",
+              padding: 24,
+              minHeight: 280,
+              background: colorBgContainer,
+              borderRadius: borderRadiusLG,
+            }}
+          >
+            <Outlet />
+          </Content>
+        </Layout>
       </Layout>
-    </Layout>
+    </RouterAuth>
   );
 };
 export default Main;

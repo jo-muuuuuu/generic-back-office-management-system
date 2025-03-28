@@ -38,3 +38,11 @@ export const deleteUser = (data) => {
     data,
   });
 };
+
+export const getMenu = (data) => {
+  return http.request({
+    url: "/permission/getMenu",
+    method: "post",
+    data,
+  });
+};

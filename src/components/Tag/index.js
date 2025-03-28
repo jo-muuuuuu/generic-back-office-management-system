@@ -2,13 +2,13 @@ import React from "react";
 import { Tag, Space } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { closeTab, setCurrentMenu } from "../../store/reducers/menuItems";
+import { closeTab, setcurrentTab } from "../../store/reducers/menuItems";
 
 import "./tag.css";
 
 const NavigationTag = () => {
   const tabsList = useSelector((state) => state.menuItems.tabsList);
-  const currentMenu = useSelector((state) => state.menuItems.currentMenu);
+  const currentTab = useSelector((state) => state.menuItems.currentTab);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -27,13 +27,13 @@ const NavigationTag = () => {
 
     if (index === len) {
       const currentData = tabsList[index - 1];
-      dispatch(setCurrentMenu(currentData));
+      dispatch(setcurrentTab(currentData));
 
       navigate(currentData.path);
     } else {
       if (tabsList.length > 1) {
         const nextData = tabsList[index + 1];
-        dispatch(setCurrentMenu(nextData));
+        dispatch(setcurrentTab(nextData));
 
         navigate(nextData.path);
       }
@@ -41,7 +41,7 @@ const NavigationTag = () => {
   };
 
   const handleClick = (tag) => {
-    dispatch(setCurrentMenu(tag));
+    dispatch(setcurrentTab(tag));
     navigate(tag.path);
   };
 
@@ -69,10 +69,8 @@ const NavigationTag = () => {
 
   return (
     <Space size={[0, 8]} wrap className="tag-container">
-      {currentMenu &&
-        tabsList.map((item, index) =>
-          setTag(item.path === currentMenu.path, item, index)
-        )}
+      {currentTab &&
+        tabsList.map((item, index) => setTag(item.path === currentTab.path, item, index))}
     </Space>
   );
 };

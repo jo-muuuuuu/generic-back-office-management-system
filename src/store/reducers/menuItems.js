@@ -4,6 +4,7 @@ const menuItemsSlice = createSlice({
   name: "menuItems",
   initialState: {
     isCollapse: false,
+    menuList: [],
     tabsList: [
       {
         path: "/",
@@ -11,31 +12,35 @@ const menuItemsSlice = createSlice({
         label: "HOMEPAGE",
       },
     ],
-    currentMenu: {},
+    currentTab: {},
   },
   reducers: {
     collapseMenu: (state) => {
       state.isCollapse = !state.isCollapse;
     },
 
+    setMenuList: (state, { payload: value }) => {
+      state.menuList = value;
+    },
+
     setTabsList: (state, { payload: value }) => {
       if (value.name !== "home") {
-        state.currentMenu = value;
+        state.currentTab = value;
         const tagExists = state.tabsList.findIndex((item) => item.name === value.name);
 
         if (tagExists === -1) {
           state.tabsList.push(value);
         }
       } else if (value.name === "home" && state.tabsList.length === 1) {
-        state.currentMenu = {};
+        state.currentTab = {};
       }
     },
 
-    setCurrentMenu: (state, { payload: value }) => {
+    setcurrentTab: (state, { payload: value }) => {
       if (value.name === "home") {
-        state.currentMenu = {};
+        state.currentTab = {};
       } else {
-        state.currentMenu = value;
+        state.currentTab = value;
       }
     },
 
@@ -46,6 +51,6 @@ const menuItemsSlice = createSlice({
   },
 });
 
-export const { collapseMenu, setTabsList, setCurrentMenu, closeTab } =
+export const { collapseMenu, setMenuList, setTabsList, setcurrentTab, closeTab } =
   menuItemsSlice.actions;
 export default menuItemsSlice.reducer;

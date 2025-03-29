@@ -5,6 +5,10 @@
   margin-right: 40px;
 }
 
+.user-info-card {
+  margin-bottom: 10px;
+}
+
 .home .user-info .user-name {
   font-size: 32px;
   margin-bottom: 10px;

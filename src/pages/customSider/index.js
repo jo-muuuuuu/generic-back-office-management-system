@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout, Menu } from "antd";
 import * as Icon from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 import { setTabsList } from "../../store/reducers/menuItems";
@@ -20,6 +20,7 @@ const CustomSider = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const items = menuList.map((menuItem) => {
     // No sub-menu
@@ -77,7 +78,8 @@ const CustomSider = () => {
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={["1"]}
+        // defaultSelectedKeys={["/home"]}
+        selectedKeys={[location.pathname]}
         items={items}
         style={{ height: "100%" }}
         onClick={selectMenu}

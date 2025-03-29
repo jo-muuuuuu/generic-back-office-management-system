@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Input, Button, message } from "antd";
 import { useNavigate, Navigate } from "react-router-dom";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setMenuList } from "../../store/reducers/menuItems";
 
 import { getMenu } from "../../api";
@@ -37,10 +37,10 @@ const Login = () => {
     <Form className="login-container" onFinish={handleSubmit}>
       <div className="login_title">System Login</div>
 
-      <Form.Item label="useranme" name="username">
+      <Form.Item label="Useranme" name="username">
         <Input placeholder="Please input username" />
       </Form.Item>
-      <Form.Item label="password" name="password">
+      <Form.Item label="Password" name="password">
         <Input.Password placeholder="Please input password" />
       </Form.Item>
       <Form.Item className="login-button">

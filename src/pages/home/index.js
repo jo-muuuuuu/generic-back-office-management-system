@@ -121,7 +121,7 @@ const Home = () => {
   return (
     <Row className="home">
       <Col span={8}>
-        <Card hoverable>
+        <Card className="user-info-card" hoverable>
           <div className="user">
             <img src={userAvatar} />
             <div className="user-info">

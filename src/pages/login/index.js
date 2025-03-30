@@ -6,13 +6,15 @@ import { useDispatch } from "react-redux";
 import { setMenuList } from "../../store/reducers/menuItems";
 
 import { getMenu } from "../../api";
+import { getToken, setToken } from "../../util/index";
 import "./login.css";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  if (localStorage.getItem("token")) {
+  // if (localStorage.getItem("token")) {
+  if (getToken()) {
     return <Navigate to="/home" replace />;
   }
 
@@ -24,7 +26,8 @@ const Login = () => {
       });
     }
     getMenu(val).then(({ data }) => {
-      localStorage.setItem("token", data.data.token);
+      setToken(data.data.token, 1);
+      // localStorage.setItem("token", data.data.token);
 
       // console.log(data.data.menu);
       dispatch(setMenuList(data.data.menu));

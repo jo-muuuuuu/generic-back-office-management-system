@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setMenuList } from "../../store/reducers/menuItems";
 
 import { getMenu } from "../../api";
-import { getToken, setToken } from "../../util/index";
+import { getToken, setToken } from "../../utils/index";
 import "./login.css";
 
 const Login = () => {

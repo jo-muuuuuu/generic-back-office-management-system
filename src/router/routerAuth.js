@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { getToken } from "../util";
+import { getToken } from "../utils";
 
 const RouterAuth = ({ children }) => {
   // const token = localStorage.getItem("token");

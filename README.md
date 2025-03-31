@@ -1,4 +1,4 @@
-# Generic Back Office Management System
+# Generic Backend Management System
 
 ## Introduction
 <img width="1920" alt="dashbooard" src="https://github.com/user-attachments/assets/a6c69d80-9435-4d21-9ec9-5e488c59a269" />

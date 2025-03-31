@@ -32,7 +32,7 @@ This project is hosted on AWS S3 as it's a static website.
 
 You can access the app via the link below and log in using the following credentials:
 
-[Generic Back Office Management System](http://back-office-mgmt-system.s3-website.ap-southeast-4.amazonaws.com/).
+[Generic Back Office Management System](http://backend-mgmt-system.s3-website.ap-southeast-4.amazonaws.com/).
 
 ### User
 

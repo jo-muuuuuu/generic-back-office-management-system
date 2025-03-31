@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+# Generic Back Office Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+This project simulates a generic backend management system, originally inspired by [this Bilibili video](https://www.bilibili.com/video/BV1rz42167A6?vd_source=44dbd0a74161c0bc443fb3c98ae0848e).
 
-In the project directory, you can run:
+However, this is not simply a direct copy of the original project, I have made some modifications on top of it. The most significant one is setting two user roles : `admin` and `user`. Upon login, a menu items list based on user's identity is returned, and users can only access certain pages based on their privileges. Besides, different user card information are displayed based on the role.
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React (Create React App, React Router Dom, React Redux)
+- Ant Design
+- Axios
+- Mock.js
+- Fakerator
+- Echarts
+- AWS
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This project uses `Mock.js` to intercept `Axios` requests and returns randomly generated USER data (`Fakerator` is used to generate random address in English). However, TABLE data for `Echarts` is hardcoded.
 
-### `npm test`
+`Redux` is utilized to manage several states, including user identity, menu items list, and page tabs.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## AWS Hosting
 
-### `npm run build`
+This project is hosted on AWS S3 as it's a static website.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+You can access the app via the link below and log in using the provided credentials:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+[Generic Back Office Management System](http://back-office-mgmt-system.s3-website.ap-southeast-4.amazonaws.com/).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### User
 
-### `npm run eject`
+- Username: xiaohe
+- Password: xiaohe
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Admin
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Username: admin
+- Password: admin
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## How to Run in Your Local Environment
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Run `npm i` to install dependencies.
+2. Run `npm start` to run the application.
+3. Open http://localhost:3000 in your browser if it does not open automatically.

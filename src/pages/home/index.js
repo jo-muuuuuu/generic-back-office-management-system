@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Col, Row, Card, Table } from "antd";
 import * as Icon from "@ant-design/icons";
 
+import { useSelector } from "react-redux";
+
 import "./home.css";
 import { getData } from "../../api";
 import MyEcharts from "../../components/Echarts/index";
@@ -57,10 +59,13 @@ const createIconElement = (name) => {
 };
 
 const Home = () => {
-  const userAvatar = require("../../assets/kira.jpeg");
+  const adminAvatar = require("../../assets/kira.jpeg");
+  const userAvatar = require("../../assets/xiaohe.jpg");
 
   const [tableData, setTableData] = useState([]);
   const [echartsData, setEchartsData] = useState({});
+
+  const identity = useSelector((state) => state.menuItems.identity);
 
   useEffect(() => {
     getData().then((res) => {
@@ -123,10 +128,10 @@ const Home = () => {
       <Col span={8}>
         <Card className="user-info-card" hoverable>
           <div className="user">
-            <img src={userAvatar} />
+            <img src={identity === "admin" ? adminAvatar : userAvatar} />
             <div className="user-info">
-              <p className="user-name">Johnny</p>
-              <p className="user-role">Admin</p>
+              <p className="user-name">{identity === "admin" ? "Johnny" : "XiaoHe"}</p>
+              <p className="user-role">{identity === "admin" ? "Admin" : "Cat"}</p>
             </div>
           </div>
 

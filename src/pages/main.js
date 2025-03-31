@@ -17,6 +17,10 @@ const Main = () => {
   const navigate = useNavigate();
 
   const collapsed = useSelector((state) => state.menuItems.isCollapse);
+  const identity = useSelector((state) => state.menuItems.identity);
+
+  const adminAvatar = require("../assets/kira.jpeg");
+  const userAvatar = require("../assets/xiaohe.jpg");
 
   const setCollapsed = () => {
     dispatch(collapseMenu());
@@ -79,7 +83,7 @@ const Main = () => {
 
             <Dropdown menu={{ items: dropdownItems }}>
               <Avatar
-                src={<img src={require("../assets/kira.jpeg")} />}
+                src={<img src={identity === "admin" ? adminAvatar : userAvatar} />}
                 style={{ marginRight: "32px" }}
               />
             </Dropdown>

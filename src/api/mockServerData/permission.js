@@ -50,6 +50,7 @@ export default {
             },
           ],
           token: Mock.Random.guid(),
+          identity: "admin",
           message: "Success!",
         },
       };
@@ -74,6 +75,7 @@ export default {
             },
           ],
           token: Mock.Random.guid(),
+          identity: "user",
           message: "Success!",
         },
       };

@@ -7,6 +7,7 @@ const menuItemsSlice = createSlice({
   name: "menuItems",
   initialState: {
     isCollapse: false,
+    identity: "",
     menuList: [],
     tabsList: [
       {
@@ -24,6 +25,10 @@ const menuItemsSlice = createSlice({
 
     setMenuList: (state, { payload: value }) => {
       state.menuList = value;
+    },
+
+    setIdentity: (state, { payload: value }) => {
+      state.identity = value;
     },
 
     setTabsList: (state, { payload: value }) => {
@@ -56,8 +61,14 @@ const persistConfig = {
 
 const persistedMenuItemsReducer = persistReducer(persistConfig, menuItemsSlice.reducer);
 
-export const { collapseMenu, setMenuList, setTabsList, setcurrentTab, closeTab } =
-  menuItemsSlice.actions;
+export const {
+  collapseMenu,
+  setIdentity,
+  setMenuList,
+  setTabsList,
+  setcurrentTab,
+  closeTab,
+} = menuItemsSlice.actions;
 
 // export default menuItemsSlice.reducer;
 export default persistedMenuItemsReducer;

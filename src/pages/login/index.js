@@ -3,7 +3,7 @@ import { Form, Input, Button, message } from "antd";
 import { useNavigate, Navigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
-import { setMenuList } from "../../store/reducers/menuItems";
+import { setIdentity, setMenuList } from "../../store/reducers/menuItems";
 
 import { getMenu } from "../../api";
 import { getToken, setToken } from "../../utils/index";
@@ -26,11 +26,12 @@ const Login = () => {
       });
     }
     getMenu(val).then(({ data }) => {
-      setToken(data.data.token, 1);
+      setToken(data.data.token, 60);
       // localStorage.setItem("token", data.data.token);
 
       // console.log(data.data.menu);
       dispatch(setMenuList(data.data.menu));
+      dispatch(setIdentity(data.data.identity));
 
       navigate("/home");
     });

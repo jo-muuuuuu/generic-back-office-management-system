@@ -72,7 +72,7 @@ const CustomSider = () => {
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
       <h3 className="app-name">
-        {collapsed ? "Back Office" : "Generic Back Office Management System"}
+        {collapsed ? "Backend System" : "Generic Backend Management System"}
       </h3>
 
       <Menu

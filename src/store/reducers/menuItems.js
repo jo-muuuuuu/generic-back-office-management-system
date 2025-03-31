@@ -51,6 +51,20 @@ const menuItemsSlice = createSlice({
       const i = state.tabsList.findIndex((item) => item.name === value.name);
       state.tabsList.splice(i, 1);
     },
+
+    reset: (state) => {
+      state.isCollapse = false;
+      state.identity = "";
+      state.menuList = [];
+      state.tabsList = [
+        {
+          path: "/home",
+          name: "home",
+          label: "HOMEPAGE",
+        },
+      ];
+      state.currentTab = { path: "/home", name: "home", label: "HOMEPAGE" };
+    },
   },
 });
 
@@ -68,6 +82,7 @@ export const {
   setTabsList,
   setcurrentTab,
   closeTab,
+  reset,
 } = menuItemsSlice.actions;
 
 // export default menuItemsSlice.reducer;

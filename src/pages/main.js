@@ -1,10 +1,12 @@
 import React from "react";
 import * as Icon from "@ant-design/icons";
 import { Button, Layout, Avatar, Dropdown, theme } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-import { collapseMenu } from "../store/reducers/menuItems";
-import { useNavigate, Outlet } from "react-router-dom";
 
+import { useSelector, useDispatch } from "react-redux";
+import { collapseMenu, reset } from "../store/reducers/menuItems";
+import { persistor } from "../store/index";
+
+import { useNavigate, Outlet } from "react-router-dom";
 import NavigationTag from "../components/Tag";
 
 import CustomSider from "./customSider";
@@ -32,6 +34,8 @@ const Main = () => {
 
   const logOut = () => {
     localStorage.removeItem("token");
+    dispatch(reset());
+    persistor.purge();
 
     navigate("/login");
   };
